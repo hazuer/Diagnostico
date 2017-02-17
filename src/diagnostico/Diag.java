@@ -1,6 +1,15 @@
 
 package diagnostico;
 
+import static java.lang.System.out;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import org.jpl7.Atom;
+import org.jpl7.JPL;
+import org.jpl7.Query;
+import org.jpl7.Term;
+import org.jpl7.Variable;
+
 /**
  *
  * @author Usuario
@@ -12,6 +21,9 @@ public class Diag extends javax.swing.JFrame {
      */
     public Diag() {
         initComponents();
+        jLabel2.setVisible(false);
+        jLabel5.setVisible(false);
+        jList2.setVisible(false);
     }
 
 
@@ -31,11 +43,12 @@ public class Diag extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "tos_persistente", "dolor_de_ojos_retroocular", "rinorrea", "fiebre_mayor_a_39°_C", "mucha_sed" };
+            String[] strings = { "tos_persistente", "nauseas", "dolor_de_ojos_retroocular", "rinorrea", "fiebre_mayor_a_39°_C", "mucha_sed" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -76,6 +89,13 @@ public class Diag extends javax.swing.JFrame {
 
         jLabel5.setText("ENFERMEDAD PRESENTADA");
 
+        jButton2.setText("Consultar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,21 +105,24 @@ public class Diag extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton2)
+                                .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(49, 49, 49)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,18 +145,18 @@ public class Diag extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         pack();
@@ -143,6 +166,70 @@ public class Diag extends javax.swing.JFrame {
         
        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       try{
+        //Primero comprobar que se haya seleccionado algun valor de la lista
+        if (jList1.isSelectionEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "Debe seleccionar un sintoma de la lista");//Muestra el mensaje anterior.
+        }else
+        {
+            String valorSeleccionado = jList1.getSelectedValue().toString();
+            jLabel2.setVisible(true);
+            jLabel5.setVisible(true);
+            jList2.setVisible(true);
+            JPL.init(); // We initialize JPL
+		Term consult_arg[] = 
+                { 
+                    new Atom( "sintomas.pl" ) 
+		};
+                
+		Query consult_query =new Query( "consult", consult_arg );
+
+		boolean consulted = consult_query.hasSolution();
+
+		if ( !consulted )
+                {
+			out.println( "Consult failed" );
+			System.exit( 1 );
+		}else
+                    {
+                        out.println( "Conectado" );
+                    }
+                
+                Query q4 = new Query("diag('"+ valorSeleccionado +"')");
+                // q4.open();
+                /* while (q4.hasMoreSolutions()) 
+                {
+                   Map<String, Term> solution = q4.nextSolution();
+                   System.out.println(solution);
+                }*/
+
+                Variable X = new Variable();
+                Query q5 =  new Query("diag", new Term[] {new Atom(valorSeleccionado)});
+                Map<String, Term>[] solutions = q5.allSolutions();
+                for ( int i=0 ; i<solutions.length ; i++ ) 
+                { 
+                    System.out.println( "X = " + solutions[i].get("X")); 
+                    System.out.println( "X1 = " + solutions[i]); 
+                }
+        
+        }
+        }
+        catch(Exception e)
+        {
+            System.err.println("Excepción general: " + e.getMessage());
+        }finally
+        {
+            // Cuando aparece el bloque finally SIEMPRE se ejecuta, sin importar que
+            //  se haya atrapado una excepción o NO
+            //System.err.println("Finally siempre se ejecuta");
+          }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +246,7 @@ public class Diag extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

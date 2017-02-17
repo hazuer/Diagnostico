@@ -75,10 +75,10 @@ reseta('XL3', gripe).
 % indicado
 % diag de X  si X = sintoma, es sintoma relacionado de  Z = Enfermedad
 % sentencia write va escribir en Z hasta que sea falzo
-diag(X):-sintomade(X,Z),write(Z),nl,fail.
+diag(X):-sintomade(X,Z),write(Z),nl,true.
 
 %Regla que pregunta pos todos los sintomas de la enfermedad
-diags(Y):-sintomade(Z,Y),write(Z),nl,fail.
+diags(Y):-sintomade(Z,Y),write(Z),nl,true.
 
 % Regla que permite dar una solucion al problema
 reseta(P):-reseta(F,P),write(F),nl.
