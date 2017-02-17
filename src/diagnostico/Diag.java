@@ -1,6 +1,7 @@
 
 package diagnostico;
 
+import java.io.File;
 import static java.lang.System.out;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -9,6 +10,9 @@ import org.jpl7.JPL;
 import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
+import org.projog.api.Projog;
+import org.projog.api.QueryResult;
+import org.projog.api.QueryStatement;
 
 /**
  *
@@ -180,7 +184,7 @@ public class Diag extends javax.swing.JFrame {
             jLabel2.setVisible(true);
             jLabel5.setVisible(true);
             jList2.setVisible(true);
-            JPL.init(); // We initialize JPL
+           /* JPL.init(); // We initialize JPL
 		Term consult_arg[] = 
                 { 
                     new Atom( "sintomas.pl" ) 
@@ -201,20 +205,30 @@ public class Diag extends javax.swing.JFrame {
                 
                 Query q4 = new Query("diag('"+ valorSeleccionado +"')");
                 // q4.open();
-                /* while (q4.hasMoreSolutions()) 
+                 while (q4.hasMoreSolutions()) 
                 {
                    Map<String, Term> solution = q4.nextSolution();
                    System.out.println(solution);
                 }*/
 
-                Variable X = new Variable();
+                /*Variable X = new Variable();
                 Query q5 =  new Query("diag", new Term[] {new Atom(valorSeleccionado)});
                 Map<String, Term>[] solutions = q5.allSolutions();
                 for ( int i=0 ; i<solutions.length ; i++ ) 
                 { 
                     System.out.println( "X = " + solutions[i].get("X")); 
                     System.out.println( "X1 = " + solutions[i]); 
-                }
+                }*/
+            Projog p = new Projog();
+            p.consultFile(new File("sintomas.pl"));
+            QueryStatement s1 = p.query("diag('"+ valorSeleccionado +"')");
+            QueryResult r1 = s1.getResult();
+            while (r1.next()) 
+            {
+              // System.out.println("X = " + r1.getTerm("X") + " Y = " + r1.getTerm("Y"));
+            }
+                 
+                 
         
         }
         }

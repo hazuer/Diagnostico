@@ -30,7 +30,7 @@ sintomade(dolor_abdominal , dengue).
 sintomade(anorexia , dengue).
 sintomade(hiperestesia , dengue).
 sintomade(dolores_generalizados , dengue).
-sintomade(congestion_faríngea , dengue).
+sintomade(congestion_faringea , dengue).
 sintomade(congestion_conjuntivitis , dengue).
 
 
@@ -38,7 +38,7 @@ sintomade(rinorrea , influenza).
 sintomade(coriza , influenza).
 sintomade(artralgias , influenza).
 sintomade(mialgias , influenza).
-sintomade(postración , influenza).
+sintomade(postracion , influenza).
 sintomade(odinofagia , influenza).
 sintomade(dolor_abdominal , influenza).
 sintomade(congestion_nasal  , influenza).
